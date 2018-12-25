@@ -1,0 +1,108 @@
+{
+    "log": {
+        "loglevel": "debug"
+    },
+    "inbounds": [{
+            "listen": "0.0.0.0",
+            "port": 1080,
+            "protocol": "http",
+
+            "settings": {
+                "udp": true,
+                "accounts": [{
+                    "user": "< USERNAME >",
+                    "pass": "< PASSWORD >"
+                }]
+            }
+        },
+        {
+            "port": 444,
+            "protocol": "shadowsocks",
+            "settings": {
+                "method": "chacha20",
+                "password": "< PASSWORD >",
+                "level": 1
+            }
+        },
+        {
+            "port": 443,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [{
+                    "id": "< Generated UUID >",
+                    "level": 1,
+                    "alterId": 100
+                }]
+            },
+            "streamSettings": {
+                "network": "kcp"
+            },
+            "detour": {
+                "to": "vmess-detour-469550"
+            }
+        }
+    ],
+    "outbound": {
+        "protocol": "vmess",
+        "settings": {
+            "vnext": [{
+                "address": "< UPSTREAM IP >",
+                "port": 443,
+                "users": [{
+                    "id": "< UUID FROM UPSTREAM SERVER >",
+                    "level": 1,
+                    "alterId": 100
+                }]
+            }]
+        },
+        "streamSettings": {
+            "network": "kcp"
+        }
+    },
+    "inboundDetour": [{
+        "protocol": "vmess",
+        "port": "10000-10010",
+        "tag": "vmess-detour-469550",
+        "settings": {},
+        "allocate": {
+            "strategy": "random",
+            "concurrency": 5,
+            "refresh": 5
+        },
+        "streamSettings": {
+            "network": "kcp"
+        }
+    }],
+    "outboundDetour": [{
+            "protocol": "freedom",
+            "tag": "direct",
+            "settings": {}
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {},
+            "tag": "blocked"
+        }
+    ],
+    "routing": {
+        "strategy": "rules",
+        "settings": {
+            "rules": [
+                {
+                    "type": "field",
+                    "domain": [
+                        "regexp:.*\\.ir$"
+                    ],
+                    "outboundTag": "direct"
+                },
+                {
+                "type": "field",
+                "ip": [
+                    "geoip:private",
+                    "geoip:ir"
+                ],
+                "outboundTag": "direct"
+            }]
+        }
+    }
+}
