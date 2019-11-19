@@ -20,15 +20,19 @@
         "tag": "agentout",
         "protocol": "vmess",
         "settings": {
-            "vnext": [{
-                "address": "< UPSTREAM IP >",
-                "port": 1433,
-                "users": [{
-                    "id": "< UPSTREAM UUID >",
-                    "alterId": 233,
-                    "security": null
-                }]
-            }]
+            "vnext": [
+                {
+                    "address": "< UPSTREAM IP >",
+                    "port": 1433,
+                    "users": [
+                        {
+                            "id": "< UPSTREAM UUID >",
+                            "alterId": 233,
+                            "security": null
+                        }
+                    ]
+                }
+            ]
         },
         "streamSettings": {
             "network": "tcp",
@@ -88,7 +92,8 @@
         }
     },
     "inboundDetour": null,
-    "outboundDetour": [{
+    "outboundDetour": [
+        {
             "protocol": "freedom",
             "settings": {
                 "response": null
