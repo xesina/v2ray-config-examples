@@ -15,29 +15,36 @@
     "outbound": {
         "protocol": "vmess",
         "settings": {
-            "vnext": [{
-                "address": "< BRIDGE SERVER IP>",
-                "port": 443,
-                "users": [{
-                    "id": "< UUID FROM BRIDGE SERVER >",
-                    "level": 1,
-                    "alterId": 100
-                }]
-            }]
+            "vnext": [
+                {
+                    "address": "<BRIDGE SERVER IP>",
+                    "port": 443,
+                    "users": [
+                        {
+                            "id": "<UUID FROM BRIDGE SERVER>",
+                            "level": 1,
+                            "alterId": 100
+                        }
+                    ]
+                }
+            ]
         },
         "streamSettings": {
             "network": "kcp"
         }
     },
-    "outboundDetour": [{
-        "protocol": "freedom",
-        "settings": {},
-        "tag": "direct"
-    }],
+    "outboundDetour": [
+        {
+            "protocol": "freedom",
+            "settings": {},
+            "tag": "direct"
+        }
+    ],
     "routing": {
         "strategy": "rules",
         "settings": {
-            "rules": [{
+            "rules": [
+                {
                     "type": "field",
                     "port": "54-79",
                     "outboundTag": "direct"
@@ -51,7 +58,7 @@
                     "type": "field",
                     "port": "444-65535",
                     "outboundTag": "direct"
-                },                           
+                },
                 {
                     "type": "field",
                     "domain": [
