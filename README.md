@@ -13,4 +13,4 @@ For example `socks5-vmess-vmess` tells us that the client accepts socks5 connect
 
 ## Examples
 
-- [socks5-vmess-vmess](../blob/master/LICENSE)
+- [socks5-vmess-vmess](../blob/master/socks5-vmess-vmess/README.md)
