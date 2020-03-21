@@ -13,4 +13,6 @@ For example `socks5-vmess-vmess` tells us that the client accepts socks5 connect
 
 ## Examples
 
+- [shadowsocks-direct](shadowsocks-direct)
 - [socks5-vmess-vmess](socks5-vmess-vmess)
+- [http-vmess-vmess](http-vmess-vmess)
