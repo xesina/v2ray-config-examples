@@ -1,0 +1,53 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 8585,
+            "tag": "mydirect",
+            "protocol": "shadowsocks",
+            "settings": {
+                "method": "chacha20",
+                "password": "<PASSWORD>",
+                "level": 1
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "settings": {},
+            "tag": "direct"
+        }
+    ],
+    "routing": {
+        "strategy": "rules",
+        "settings": {
+            "rules": [
+                {
+                    "type": "field",
+                    "outboundTag": "direct",
+                    "inboundTag": [
+                        "mydirect"
+                    ]
+                },
+                {
+                    "type": "field",
+                    "domain": [
+                        "regexp:.*\\.ir$"
+                    ],
+                    "outboundTag": "direct"
+                },
+                {
+                    "type": "field",
+                    "ip": [
+                        "geoip:private",
+                        "geoip:ir"
+                    ],
+                    "outboundTag": "direct"
+                }
+            ]
+        }
+    }
+}
